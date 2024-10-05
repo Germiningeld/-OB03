@@ -22,7 +22,7 @@ class Bird(Animal):
 
 class Mammal(Animal):
     def __init__(self, name, age, size:str):
-        super.__init__(name, age)
+        super().__init__(name, age)
         self.size = size
 
     def make_sound(self):
@@ -42,3 +42,22 @@ class Reptile(Animal):
     def eat(self):
         print("Я ем насекомых")
 
+
+
+bird = Bird("Воробей", 1, "Серый")
+mammal = Mammal("Корова", 5, "Большая")
+reptile = Reptile("Кобра", 2, False)
+
+
+
+def animal_sound(animals):
+    for animal in animals:
+        animal.make_sound()
+
+animals_list = [
+    bird,
+    mammal,
+    reptile
+]
+
+animal_sound(animals_list)
