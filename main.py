@@ -63,7 +63,7 @@ class Veterinarian(Worker):
     def __init__(self, name, experience):
         super().__init__(name, experience)
 
-    def feed_animal(self):
+    def heal_animal(self):
         print("Я вылечил животного")
 
 
@@ -111,5 +111,12 @@ zoo.add_animal('Слон', 48)
 zoo.add_animal('Жираф', 27)
 zoo.add_worker('Витек', 69)
 
+zoo_keeper = ZooKeeper('Витек', 3)
+veterinarian = Veterinarian('Cанек', 3)
+
+
+
 animal_sound(animals_list)
 zoo.print_info()
+zoo_keeper.feed_animal()
+veterinarian.heal_animal()
