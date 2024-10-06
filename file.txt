@@ -1,0 +1,1 @@
+{'name': 'ZeroZoo', 'adress': 'пр. Науки, 1', 'animals': [{'name': 'Слон', 'age': 48}, {'name': 'Жираф', 'age': 27}], 'workers': [{'name': 'Витек', 'age': 69}]}

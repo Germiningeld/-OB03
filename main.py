@@ -1,3 +1,5 @@
+import json
+
 class Animal():
     def __init__(self, name:str, age:int):
         self.name = name
@@ -92,6 +94,41 @@ class Zoo():
             for worker in self.workers:
                 print(f'{worker.name}, {worker.age}')
 
+    def set_data(self):
+        zoo_list = self.__dict__
+
+        json = {}
+
+        for (key, value) in zoo_list.items():
+            if isinstance(value, list):
+                item_list = []
+                for item in value:
+                    item_list.append(item.__dict__)
+                json[key] = item_list
+            else:
+                json[key] = value
+
+        file = open('file.txt', 'w', encoding='utf-8')
+        file.write(f'{json}')
+
+def get_data():
+    file = open('file.txt', 'r', encoding='utf-8')
+    data = eval(file.readline())
+
+    zoo = Zoo(data['name'], data['adress'])
+
+    if data['animals']:
+        for animal in data['animals']:
+            # print(animal['name'])
+            zoo.add_animal(animal['name'], animal['age'])
+
+    if data['workers']:
+        for worker in data['workers']:
+            # print(animal['name'])
+            zoo.add_worker(worker['name'], worker['age'])
+
+    return zoo
+
 
 bird = Bird("Воробей", 1, "Серый")
 mammal = Mammal("Корова", 5, "Большая")
@@ -106,17 +143,21 @@ animals_list = [
     reptile
 ]
 
-zoo = Zoo('ZeroZoo', 'пр. Науки, 1')
-zoo.add_animal('Слон', 48)
-zoo.add_animal('Жираф', 27)
-zoo.add_worker('Витек', 69)
+# zoo = Zoo('ZeroZoo', 'пр. Науки, 1')
+# zoo.add_animal('Слон', 48)
+# zoo.add_animal('Жираф', 27)
+# zoo.add_worker('Витек', 69)
 
-zoo_keeper = ZooKeeper('Витек', 3)
-veterinarian = Veterinarian('Cанек', 3)
+# zoo_keeper = ZooKeeper('Витек', 3)
+# veterinarian = Veterinarian('Cанек', 3)
+
+# animal_sound(animals_list)
+# zoo.print_info()
+# zoo_keeper.feed_animal()
+# veterinarian.heal_animal()
 
 
+# zoo.set_data()
+zoo = get_data()
 
-animal_sound(animals_list)
-zoo.print_info()
-zoo_keeper.feed_animal()
-veterinarian.heal_animal()
+print(zoo.__dict__)
